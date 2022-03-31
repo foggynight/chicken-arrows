@@ -1,6 +1,9 @@
 # chicken-arrows
 
-Threading macros of Clojure implemented in CHICKEN Scheme.
+This is a port of [cl-arrows](https://github.com/nightfly19/cl-arrows) to
+CHICKEN Scheme.
+
+Implements the `->` and `->>` threading macros of Clojure.
 
 ## License
 
