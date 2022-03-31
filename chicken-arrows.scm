@@ -9,12 +9,23 @@
       #f
       (aux (cdr lst) (car lst))))
 
-;; Insert SEXP1 as the first argument of SEXP2 before evaluation.
-(define-macro (-> sexp1 sexp2)
-  (let ((proc (car sexp2)))
-    (cons proc (cons sexp1 (cdr sexp2)))))
+(define (insert-first arg surround)
+  (cons (car surround) (cons arg (cdr surround))))
+
+(define (insert-last arg surround)
+  (append surround (list arg)))
+
+(define (simple-inserter insert-proc)
+  (lambda (acc next)
+    (if (pair? next)
+        (insert-proc acc next)
+        (list next acc))))
+
+;; Insert the first sexp of REST as the first argument of the second sexp of
+;; REST, the result into the next etc, before evaluation.
+(define-macro (-> . rest)
+  (reduce (simple-inserter insert-first) rest))
 
 ;; Like -> but inserts as the last argument instead of the first.
-(define-macro (->> sexp1 sexp2)
-  (let ((proc (car sexp2)))
-    (append sexp2 (list sexp1))))
+(define-macro (->> . rest)
+  (reduce (simple-inserter insert-last) rest))
