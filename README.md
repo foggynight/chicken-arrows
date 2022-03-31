@@ -1,7 +1,7 @@
 # chicken-arrows
 
-This is a port of [cl-arrows](https://github.com/nightfly19/cl-arrows) to
-CHICKEN Scheme.
+This is a port of [arrows](https://github.com/Harleqin/arrows) to CHICKEN
+Scheme.
 
 Implements the `->` and `->>` threading macros of Clojure.
 
